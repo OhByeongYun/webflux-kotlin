@@ -3,8 +3,8 @@ package com.example.demo.common.util
 /**
  * **For jacoco coverage reporter.**
  *
- * jacoco is not covers default branches of if/switch/when.
- * normally, next classes are can not reach 100% coverage.
+ * Jacoco is not covers default branches of if/switch/when/....
+ * Next classes are can not reach 100% coverage normally.
  *
  * ```
  * enum class Foo(val value: String) {

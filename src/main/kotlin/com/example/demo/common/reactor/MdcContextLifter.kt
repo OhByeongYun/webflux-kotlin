@@ -49,6 +49,7 @@ class MdcContextLifter<T>(private val coreSubscriber: CoreSubscriber<T>) : CoreS
     }
 
     override fun onError(throwable: Throwable?) {
+        coreSubscriber.currentContext().copyToMdc()
         coreSubscriber.onError(throwable)
     }
 
@@ -58,7 +59,7 @@ class MdcContextLifter<T>(private val coreSubscriber: CoreSubscriber<T>) : CoreS
 }
 
 /**
- * Extension function for the Reactor [Context]. Copies the current context to the MDC, if context is empty clears the MDC.
+ * Extension function for the Reactor [Context]. Copies the current context to the MDC.
  * State of the MDC after calling this method should be same as Reactor [Context] state.
  * One thread-local access only.
  */
@@ -66,9 +67,6 @@ private fun Context.copyToMdc() {
     if (!this.isEmpty) {
         val map: Map<String, String> = this.stream()
             .collect(Collectors.toMap({ e -> e.key.toString() }, { e -> e.value.toString() }))
-
         MDC.setContextMap(map)
-    } else {
-        MDC.clear()
     }
 }

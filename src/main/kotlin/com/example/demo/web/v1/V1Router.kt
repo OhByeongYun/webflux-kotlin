@@ -13,7 +13,8 @@ class V1Router : Router {
 
     override fun route(dsl: CoRouterFunctionDsl) = dsl.apply {
         GET("") {
-            ServerResponse.ok().bodyValueAndAwait("success")
+            // TODO implement.
+            ServerResponse.ok().bodyValueAndAwait("ok")
         }
     }
 }

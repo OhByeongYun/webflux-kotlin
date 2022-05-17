@@ -6,7 +6,17 @@ var routerFactory: RouterFactory? = null
 
 /**
  * Route to the given api version by injected [RouterFactory].
- * /v1/V1Router, /v2/V2Router, ...
+ * Concrete router placed on subdirectory of each version.
+ *
+ * Example:
+ * ```
+ * /v1/V1Router,
+ * /v2/V2Router,
+ * ...
+ * ```
+ *
+ * @author ohbyeongyun
+ * @since 0.0.1
  */
 inline fun <reified T : ApiVersion> T.route(dsl: CoRouterFunctionDsl): CoRouterFunctionDsl {
     return dsl.apply {
@@ -18,6 +28,20 @@ inline fun <reified T : ApiVersion> T.route(dsl: CoRouterFunctionDsl): CoRouterF
     }
 }
 
-inline fun <reified T : CoRouterFunctionDsl> T.inject(factory: RouterFactory) {
+/**
+ * Inject [RouterFactory] to the Route.
+ *
+ * Example:
+ * ```
+ * corouter {
+ *   inject(routerFactory)
+ *   ApiVersion.V1.route(this)
+ * }
+ * ```
+ *
+ * @author ohbyeongyun
+ * @since 0.0.1
+ */
+fun inject(factory: RouterFactory) {
     routerFactory = factory
 }

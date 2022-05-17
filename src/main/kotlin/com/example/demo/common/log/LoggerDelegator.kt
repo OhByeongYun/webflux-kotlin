@@ -18,7 +18,6 @@ class LoggerDelegator(
     private lateinit var logger: Logger
 
     override operator fun getValue(thisRef: Any?, property: KProperty<*>): Logger {
-        LoggerFactory.getLogger("loggerDelete").info("$property")
 
         if (::logger.isInitialized) {
             return logger

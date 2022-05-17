@@ -11,15 +11,16 @@ import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 import reactor.util.context.Context
+import com.example.demo.web.common.filter.Context as PrivateContext
 
 @Component
 class RequestContextWriteFilter : WebFilter {
 
     override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
 
-        val contextMap = createContextMap(exchange.request)
+        val context = createContext(exchange.request)
 
-        RequestContext.setContextMap(contextMap)
+        RequestContext.setContextMap(context.contextMap)
 
         return chain.filter(exchange)
             .contextWrite {
@@ -27,14 +28,22 @@ class RequestContextWriteFilter : WebFilter {
             }
     }
 
-    private fun createContextMap(request: ServerHttpRequest): Map<String, String> {
+    private fun createContext(request: ServerHttpRequest): PrivateContext {
 
         val transactionId = request.headers.getFirst(Constants.HEADER_TRANSACTION_ID).takeUnless {
             it.isNullOrEmpty()
         } ?: UUID.randomUUID().toString()
 
-        return mapOf(
-            TRANSACTION_ID to transactionId
+        return PrivateContext(
+            transactionId = transactionId
         )
     }
+}
+
+private data class Context(
+    private val transactionId: String
+) {
+    val contextMap: Map<String, String> = mapOf(
+        TRANSACTION_ID to transactionId
+    )
 }

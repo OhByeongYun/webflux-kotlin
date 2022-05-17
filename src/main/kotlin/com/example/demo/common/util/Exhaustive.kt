@@ -20,7 +20,7 @@ package com.example.demo.common.util
  * }
  * ```
  *
- * blow is workaround.
+ * below is workaround.
  * ```
  * class Test {
  *      fun get(foo: Foo): String {

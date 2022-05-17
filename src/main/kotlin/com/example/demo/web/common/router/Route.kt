@@ -9,6 +9,7 @@ var routerFactory: RouterFactory? = null
  * Concrete router placed on subdirectory of each version.
  *
  * Example:
+ *
  * ```
  * /v1/V1Router,
  * /v2/V2Router,
@@ -32,6 +33,7 @@ inline fun <reified T : ApiVersion> T.route(dsl: CoRouterFunctionDsl): CoRouterF
  * Inject [RouterFactory] to the Route.
  *
  * Example:
+ *
  * ```
  * corouter {
  *   inject(routerFactory)

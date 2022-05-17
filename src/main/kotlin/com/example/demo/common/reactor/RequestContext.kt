@@ -21,6 +21,6 @@ object RequestContext {
     fun setContextMap(contextMap: Map<String, String>) = adapter.setContextMap(contextMap)
 
     fun clear() {
-        adapter.remove(TRANSACTION_ID)
+        adapter.clear()
     }
 }

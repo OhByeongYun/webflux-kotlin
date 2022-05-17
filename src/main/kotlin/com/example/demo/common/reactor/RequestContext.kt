@@ -1,10 +1,10 @@
 package com.example.demo.common.reactor
 
-import ch.qos.logback.classic.util.LogbackMDCAdapter
+import org.slf4j.helpers.BasicMDCAdapter
 
 object RequestContext {
 
-    private val adapter = LogbackMDCAdapter()
+    private val adapter = BasicMDCAdapter()
 
     const val TRANSACTION_ID = "requestContext.transactionId"
 

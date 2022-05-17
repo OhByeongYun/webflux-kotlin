@@ -1,10 +1,10 @@
 package com.example.demo.common.reactor
 
-import org.slf4j.helpers.BasicMDCAdapter
+import ch.qos.logback.classic.util.LogbackMDCAdapter
 
 object RequestContext {
 
-    private val adapter = BasicMDCAdapter()
+    private val adapter = LogbackMDCAdapter()
 
     const val TRANSACTION_ID = "requestContext.transactionId"
 
@@ -20,5 +20,7 @@ object RequestContext {
 
     fun setContextMap(contextMap: Map<String, String>) = adapter.setContextMap(contextMap)
 
-    fun clear() = adapter.clear()
+    fun clear() {
+        adapter.remove(TRANSACTION_ID)
+    }
 }

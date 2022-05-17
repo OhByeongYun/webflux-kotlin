@@ -2,7 +2,7 @@
 <configuration>
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%-4r [%t] %5p %c{1} - %m  [tx.id=%X{transaction.id}]%n</pattern>
+            <pattern>%-4r [%t] %5p %c{1} - %m  [tx.id=%X{requestContext.transactionId}]%n</pattern>
         </encoder>
     </appender>
     <root level="INFO">

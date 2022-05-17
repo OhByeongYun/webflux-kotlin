@@ -6,7 +6,7 @@ object RequestContext {
 
     private val adapter = BasicMDCAdapter()
 
-    const val TRANSACTION_ID = "transaction.id"
+    const val TRANSACTION_ID = "requestContext.transactionId"
 
     val transactionId: String
         get() {
